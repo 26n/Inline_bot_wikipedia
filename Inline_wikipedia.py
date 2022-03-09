@@ -3,10 +3,10 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import os, hashlib
 
-from aiogram.types import Input TextMessageContetn, InlineQueryResultArticle
+from aiogram.types import InputTextMessageContent, InlineQueryResultArticle
 
 bot = Bot(token=os.getenv('TOKEN'))
-dp = Dispatcher
+dp = Dispatcher(bot)
 
 @dp.inline_handler()
 async def inline_handler(query: types.InlineQuery):
@@ -18,9 +18,9 @@ async def inline_handler(query: types.InlineQuery):
 		id = result_id,
 		title = 'Статья Wikipedia:',
 		url = link,
-		input_message_content=types.InpurTextMessageContent(
+		input_message_content=types.InputTextMessageContent(
 			message_text=link))]
 
-	await query.answer(articles, cache_time=1, is_personal=true)
+	await query.answer(articles, cache_time=1, is_personal=True)
 
 executor.start_polling(dp, skip_updates=True)
